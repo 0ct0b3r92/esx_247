@@ -1,5 +1,5 @@
 # esx_247
-This is an edit of one of the esx_pizza jobs I found.  Credit will be given when I find the original creator.
+This is an edit of esx_truckerjob.  Original script by Marcio_Nl. Used with permission.
 
 I created this job for a member of my life rp server (our civs can own businesses and hire people).
 
