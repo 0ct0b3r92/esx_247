@@ -3,6 +3,9 @@
 -- ORIGINAL SCRIPT BY Marcio FOR CFX-ESX
 -- Script serveur No Brain 
 -- www.nobrain.org
+
+-- Modified by: Chip W
+-- New Andreas Life RP
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 ESX = nil
@@ -16,7 +19,7 @@ end)
 --------------------------------------------------------------------------------
 -- NE RIEN MODIFIER
 --------------------------------------------------------------------------------
-local namezone = "Delivery"
+local namezone = "247 Delivery"
 local namezonenum = 0
 local namezoneregion = 0
 local MissionRegion = 0
@@ -96,6 +99,15 @@ function MenuCloakRoom()
 					if skin.sex == 0 then
 					
 					local model = GetHashKey("u_m_y_burgerdrug_01")
+					
+					RequestModel(model)
+						while not HasModelLoaded(model) do
+						RequestModel(model)
+						Citizen.Wait(0)
+					end
+
+						SetPlayerModel(PlayerId(), model)
+						SetModelAsNoLongerNeeded(model)
 					
 					else
 					
@@ -203,7 +215,14 @@ AddEventHandler('esx_247:hasEnteredMarker', function(zone)
 		if isInService and IsJob247() then
 			if MissionRetourCamion or MissionLivraison then
 				CurrentAction = 'hint'
-                CurrentActionMsg  = _U('already_have_truck')
+                --CurrentActionMsg  = _U('already_have_truck')
+				TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('already_have_truck')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 			else
 				MenuVehicleSpawner()
 			end
@@ -222,14 +241,36 @@ AddEventHandler('esx_247:hasEnteredMarker', function(zone)
 					end
                 
 					CurrentAction     = 'delivery'
-                    CurrentActionMsg  = _U('delivery')
+                    --CurrentActionMsg  = _U('delivery')
+					TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('delivery')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 				else
 					CurrentAction = 'hint'
-                    CurrentActionMsg  = _U('not_your_truck')
+                    --CurrentActionMsg  = _U('not_your_truck')
+					TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('not_your_truck')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 				end
 			else
 				CurrentAction = 'hint'
-                CurrentActionMsg  = _U('not_your_truck2')
+                --CurrentActionMsg  = _U('not_your_truck2')
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('not_your_truck2')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+				
 			end
 		end
 	end
@@ -243,10 +284,24 @@ AddEventHandler('esx_247:hasEnteredMarker', function(zone)
 				
 				if plaquevehicule == plaquevehiculeactuel then
                     CurrentAction     = 'retourcamionannulermission'
-                    CurrentActionMsg  = _U('cancel_mission')
+                    --CurrentActionMsg  = _U('cancel_mission')
+					TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('cancel_mission')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 				else
 					CurrentAction = 'hint'
-                    CurrentActionMsg  = _U('not_your_truck')
+                    --CurrentActionMsg  = _U('not_your_truck')
+					TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('not_your_truck')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 				end
 			else
                 CurrentAction     = 'retourcamionperduannulermission'
@@ -263,7 +318,14 @@ AddEventHandler('esx_247:hasEnteredMarker', function(zone)
                     CurrentAction     = 'retourcamion'
 				else
                     CurrentAction     = 'retourcamionannulermission'
-                    CurrentActionMsg  = _U('not_your_truck')
+                     --CurrentActionMsg  = _U('not_your_truck')
+					TriggerEvent("pNotify:SendNotification",{
+					text = "Notification: <br /> " ..(_U('not_your_truck')),
+					type = "success",
+					timeout = (5000),
+					layout = "centerLeft",
+					queue = "global"
+				})
 				end
 			else
                 CurrentAction     = 'retourcamionperdu'
@@ -325,9 +387,23 @@ end
 function retourcamion_non()
 	
 	if livraisonnombre >= Config.MaxDelivery then
-		ESX.ShowNotification(_U('need_it'))
+		--ESX.ShowNotification(_U('need_it'))
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('need_it')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})		
 	else
-		ESX.ShowNotification(_U('ok_work'))
+		--ESX.ShowNotification(_U('ok_work'))
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('ok_work')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})		
 		nouvelledestination()
 	end
 end
@@ -350,7 +426,14 @@ function retourcamionperdu_oui()
 end
 
 function retourcamionperdu_non()
-	ESX.ShowNotification(_U('scared_me'))
+	--ESX.ShowNotification(_U('scared_me'))
+	TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('scared_me')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})	
 end
 
 function retourcamionannulermission_oui()
@@ -372,7 +455,14 @@ function retourcamionannulermission_oui()
 end
 
 function retourcamionannulermission_non()	
-	ESX.ShowNotification(_U('resume_delivery'))
+	--ESX.ShowNotification(_U('resume_delivery'))
+	TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('resume_delivery')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})	
 end
 
 function retourcamionperduannulermission_oui()
@@ -394,7 +484,14 @@ function retourcamionperduannulermission_oui()
 end
 
 function retourcamionperduannulermission_non()	
-	ESX.ShowNotification(_U('resume_delivery'))
+	--ESX.ShowNotification(_U('resume_delivery'))
+	TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('resume_delivery')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})	
 end
 
 function round(num, numDecimalPlaces)
@@ -420,35 +517,105 @@ function donnerlapaye()
 	
 	if vievehicule >= 1 then
 		if livraisonTotalPaye == 0 then
-			ESX.ShowNotification(_U('not_delivery'))
-			ESX.ShowNotification(_U('pay_repair'))
-			ESX.ShowNotification(_U('repair_minus')..argentretire)
+			--ESX.ShowNotification(_U('not_delivery'))
+			TriggerEvent("pNotify:SendNotification",{
+            text = "Notification: <br /> " ..(_U('not_delivery')),
+            type = "success",
+            timeout = (5000),
+            layout = "centerLeft",
+            queue = "global"
+        })
+			--ESX.ShowNotification(_U('pay_repair'))
+			TriggerEvent("pNotify:SendNotification",{
+            text = "Notification: <br /> " ..(_U('pay_repair')),
+            type = "success",
+            timeout = (7000),
+            layout = "centerLeft",
+            queue = "global"
+        })
+			--ESX.ShowNotification(_U('repair_minus')..argentretire)
+			TriggerEvent("pNotify:SendNotification",{
+            text = "Notification: <br /> " ..(_U('repair_minus')..argentretire),
+            type = "success",
+            timeout = (9000),
+            layout = "centerLeft",
+            queue = "global"
+        })
 			TriggerServerEvent("esx_247:pay", amount)
 			livraisonTotalPaye = 0
 		else
 			if argentretire <= 0 then
-				ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				--ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('shipments_plus')..livraisonTotalPaye),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 				TriggerServerEvent("esx_247:pay", amount)
 				livraisonTotalPaye = 0
 			else
-				ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
-				ESX.ShowNotification(_U('repair_minus')..argentretire)
+				--ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('shipments_plus')..livraisonTotalPaye),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+				--ESX.ShowNotification(_U('repair_minus')..argentretire)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('repair_minus')..argentretire),
+				type = "success",
+				timeout = (7000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 					TriggerServerEvent("esx_247:pay", amount)
 				livraisonTotalPaye = 0
 			end
 		end
 	else
 		if livraisonTotalPaye ~= 0 and amount <= 0 then
-			ESX.ShowNotification(_U('truck_state'))
+			--ESX.ShowNotification(_U('truck_state'))
+			TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('truck_state')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 			livraisonTotalPaye = 0
 		else
 			if argentretire <= 0 then
-				ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				--ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('shipments_plus')..livraisonTotalPaye),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 					TriggerServerEvent("esx_247:pay", amount)
 				livraisonTotalPaye = 0
 			else
-				ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
-				ESX.ShowNotification(_U('repair_minus')..argentretire)
+				--ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('shipments_plus')..livraisonTotalPaye),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+				--ESX.ShowNotification(_U('repair_minus')..argentretire)
+				TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('repair_minus')..argentretire),
+				type = "success",
+				timeout = (7000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 				TriggerServerEvent("esx_247:pay", amount)
 				livraisonTotalPaye = 0
 			end
@@ -464,18 +631,53 @@ function donnerlapayesanscamion()
 	local amount = livraisonTotalPaye-argentretire
 	
 	if livraisonTotalPaye == 0 then
-		ESX.ShowNotification(_U('no_delivery_no_truck'))
-		ESX.ShowNotification(_U('truck_price')..argentretire)
+		--ESX.ShowNotification(_U('no_delivery_no_truck'))
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('no_delivery_no_truck')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+		--ESX.ShowNotification(_U('truck_price')..argentretire)
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('truck_price')..argentretire),
+				type = "success",
+				timeout = (7000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 					TriggerServerEvent("esx_247:pay", amount)
 		livraisonTotalPaye = 0
 	else
 		if amount >= 1 then
-			ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
-			ESX.ShowNotification(_U('truck_price')..argentretire)
+			--ESX.ShowNotification(_U('shipments_plus')..livraisonTotalPaye)
+			TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('shipments_plus')..livraisonTotalPaye),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+			---ESX.ShowNotification(_U('truck_price')..argentretire)
+			TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('truck_price')..argentretire),
+				type = "success",
+				timeout = (7000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 					TriggerServerEvent("esx_247:pay", amount)
 			livraisonTotalPaye = 0
 		else
-			ESX.ShowNotification(_U('truck_state'))
+			--ESX.ShowNotification(_U('truck_state'))
+			TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('truck_state')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 			livraisonTotalPaye = 0
 		end
 	end
@@ -609,10 +811,10 @@ end)
 Citizen.CreateThread(function()
 	local blip = AddBlipForCoord(Config.Cloakroom.CloakRoom.Pos.x, Config.Cloakroom.CloakRoom.Pos.y, Config.Cloakroom.CloakRoom.Pos.z)
   
-	SetBlipSprite (blip, 67)
+	SetBlipSprite (blip, 226)
 	SetBlipDisplay(blip, 4)
 	SetBlipScale  (blip, 1.2)
-	SetBlipColour (blip, 5)
+	SetBlipColour (blip, 83)
 	SetBlipAsShortRange(blip, true)
 
 	BeginTextCommandSetBlipName("STRING")
@@ -695,11 +897,39 @@ function MissionLivraisonLetsGo()
 	EndTextCommandSetBlipName(Blips['annulermission'])
 
 	if MissionRegion == 1 then -- Los santos
-		ESX.ShowNotification(_U('meet_ls'))
+		--ESX.ShowNotification(_U('meet_ls'))
+			TriggerEvent("pNotify:SendNotification",{
+			text = "Notification: <br /> " ..(_U('meet_ls')),
+			type = "success",
+			timeout = (5000),
+			layout = "centerLeft",
+			queue = "global"
+		})
+		
+		
 	elseif MissionRegion == 2 then -- Blaine County
-		ESX.ShowNotification(_U('meet_bc'))
+		--ESX.ShowNotification(_U('meet_bc'))
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('meet_bc')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+		
+		
 	elseif MissionRegion == 0 then -- au cas ou
-		ESX.ShowNotification(_U('meet_del'))
+		--ESX.ShowNotification(_U('meet_del'))
+		TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('meet_del')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
+		
+		
+		
 	end
 
 	MissionLivraison = true
@@ -720,8 +950,14 @@ function MissionLivraisonStopRetourDepot()
 		Blips['annulermission'] = nil
 	end
 
-	ESX.ShowNotification(_U('return_depot'))
-	
+	--ESX.ShowNotification(_U('return_depot'))
+	TriggerEvent("pNotify:SendNotification",{
+				text = "Notification: <br /> " ..(_U('return_depot')),
+				type = "success",
+				timeout = (5000),
+				layout = "centerLeft",
+				queue = "global"
+			})
 	MissionRegion = 0
 	MissionLivraison = false
 	MissionNum = 0
