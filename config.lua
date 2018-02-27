@@ -5,7 +5,8 @@ Config.TruckPrice	= 200
 Config.Locale       = 'en'
 
 Config.Trucks = {
-	"247delivery",
+	"faggio" --(comment this out if using 247delivery)
+	--"247delivery", (to use this, download and uncomment https://github.com/Chip-W/247-Scooter)
 	--"packer"	
 }
 
