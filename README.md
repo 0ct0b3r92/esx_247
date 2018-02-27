@@ -1,6 +1,8 @@
 # esx_247
 This is an edit of esx_truckerjob.  Original script by Marcio_Nl. Used with permission.
 
+This job now uses [pNotify](https://github.com/Nick78111/pNotify) for notifications.
+
 I created this job for a member of my life rp server (our civs can own businesses and hire people).
 
 esx_247 is the job
@@ -16,11 +18,13 @@ esx_247 is the job
 - esx_jobs
 - esx_joblisting
 - esx_society
+- [pNotify](https://github.com/Nick78111/pNotify)
 
 ----------------------------------
 
 # Install:
-- drop all folders into your /resources folder
+- drop esx_247 folder into your [esx] group folder
+- drop other two folders into your /resources folder
 - add start esx_247 | start 247mped | start 247delivery to your server.cfg
 - import /esx_247/esx_247.sql into your database
 
