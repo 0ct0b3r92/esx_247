@@ -6,8 +6,10 @@ This job now uses [pNotify](https://github.com/Nick78111/pNotify) for notificati
 I created this job for a member of my life rp server (our civs can own businesses and hire people).
 
 esx_247 is the job
-247mped is the male ped
-247delivery is the delivery vehicle
+
+# Optional Downloads
+[247mped is the male ped](https://github.com/Chip-W/247-ped)
+[247delivery is the delivery vehicle](https://github.com/Chip-W/247-Scooter)
 
 ----------------------------------
 
@@ -24,8 +26,7 @@ esx_247 is the job
 
 # Install:
 - drop esx_247 folder into your [esx] group folder
-- drop other two folders into your /resources folder
-- add start esx_247 | start 247mped | start 247delivery to your server.cfg
+- add start esx_247 to your server.cfg
 - import /esx_247/esx_247.sql into your database
 
 ----------------------------------
