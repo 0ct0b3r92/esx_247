@@ -8,8 +8,8 @@ I created this job for a member of my life rp server (our civs can own businesse
 esx_247 is the job
 
 # Optional Downloads
-[247mped is the male ped](https://github.com/Chip-W/247-ped)
-[247delivery is the delivery vehicle](https://github.com/Chip-W/247-Scooter)
+- [247mped is the male ped](https://github.com/Chip-W/247-ped)
+- [247delivery is the delivery vehicle](https://github.com/Chip-W/247-Scooter)
 
 ----------------------------------
 
